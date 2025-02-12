@@ -1,32 +1,58 @@
 package edu.alumno.videogames.service.imp;
 
+import org.springframework.stereotype.Service;
+
+import edu.alumno.videogames.exception.EntityIllegalArgumentException;
+import edu.alumno.videogames.exception.EntityNotFoundException;
+import edu.alumno.videogames.model.db.Compra;
 import edu.alumno.videogames.model.dto.CompraEdit;
 import edu.alumno.videogames.model.dto.CompraInfo;
+import edu.alumno.videogames.repository.CompraRepository;
 import edu.alumno.videogames.service.CrudService;
+import edu.alumno.videogames.service.mappers.CompraMapper;
+import lombok.RequiredArgsConstructor;
 
+@Service
+@RequiredArgsConstructor
 public class CompraServiceImp implements CrudService<CompraEdit, CompraInfo> {
+
+    private CompraRepository compraRepository;
 
     @Override
     public CompraEdit create(CompraEdit entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'create'");
+        if (entity.getId() != null) {
+            throw new EntityIllegalArgumentException("COMPRA_ID_MISMATCH",
+                    "El ID debe ser nulo al crear una nueva etiqueta.");
+        }
+        Compra compra = CompraMapper.INSTANCE.compraToCompraEdit(entity);
+        return CompraMapper.INSTANCE.compraEditToCompra(compraRepository.save(compra));
     }
 
     @Override
     public CompraInfo read(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'read'");
+        Compra entity = compraRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("COMPRA_NOT_FOUND",
+                        "La compra con ID " + id + " no existe."));
+        return CompraMapper.INSTANCE.compraToCompraInfo(entity);
     }
 
     @Override
     public CompraEdit update(Long id, CompraEdit entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        if (!id.equals(entity.getId())) {
+            throw new EntityIllegalArgumentException("COMPRA_ID_MISMATCH",
+                    "El ID proporcionado no coincide con el ID de la compra.");
+        }
+        Compra existingEntity = compraRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("COMPRA_NOT_FOUND_FOR_UPDATE",
+                        "No se puede actualizar. La compra con ID " + id + " no existe."));
+        CompraMapper.INSTANCE.updateCompraFromCompraEdit(entity, existingEntity);
+        return CompraMapper.INSTANCE.compraEditToCompra(existingEntity);
     }
 
     @Override
     public void delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
-    }    
+        if (compraRepository.existsById(id)) {
+            compraRepository.deleteById(id);
+        }
+    }
 }

@@ -5,10 +5,12 @@ import org.springframework.stereotype.Service;
 import edu.alumno.videogames.model.dto.VideojuegoEdit;
 import edu.alumno.videogames.model.dto.VideojuegoInfo;
 import edu.alumno.videogames.repository.VideojuegoRepository;
-import edu.alumno.videogames.service.CrudService;
+import edu.alumno.videogames.service.VideojuegosService;
+import lombok.RequiredArgsConstructor;
 
 @Service
-public class VideojuegoServiceImpl implements CrudService<VideojuegoEdit, VideojuegoInfo> {
+@RequiredArgsConstructor
+public class VideojuegoServiceImpl implements VideojuegosService {
 
     @SuppressWarnings("unused")
     private VideojuegoRepository videojuegoRepository;
