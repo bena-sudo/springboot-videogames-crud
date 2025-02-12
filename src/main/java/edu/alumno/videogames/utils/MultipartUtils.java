@@ -23,7 +23,7 @@ import edu.alumno.videogames.exception.responseHelpers.MultipartProcessingExcept
  * personalizada {@code MultipartProcessingException}.
  * </p>
  *
- * @author JoseRa
+ * @author bena-sudo
  * @version 1.0
  */
 public class MultipartUtils {
