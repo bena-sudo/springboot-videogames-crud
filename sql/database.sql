@@ -5,7 +5,7 @@ CREATE TABLE usuarios (
     nombre VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password_hash TEXT NOT NULL,
-    rol VARCHAR(50) NOT NULL CHECK (rol IN ('admin', 'cliente'))
+    rol VARCHAR(50) NOT NULL CHECK (rol IN ('ADMIN', 'CLIENTE'))
 );
 CREATE TABLE videojuegos (
     id SERIAL PRIMARY KEY,
