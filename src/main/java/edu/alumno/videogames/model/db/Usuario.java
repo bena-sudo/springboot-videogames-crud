@@ -1,6 +1,7 @@
 package edu.alumno.videogames.model.db;
 
 import edu.alumno.videogames.enums.Rol;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -30,6 +31,7 @@ public class Usuario {
     private String email;
 
     @NotNull
+    @Column(name="password_hash")
     private String passwordHash;
 
     @Enumerated(EnumType.STRING)
