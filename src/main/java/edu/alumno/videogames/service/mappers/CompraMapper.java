@@ -13,9 +13,9 @@ public interface CompraMapper {
     CompraMapper INSTANCE = Mappers.getMapper(CompraMapper.class);
 
     Compra compraToCompraEdit(CompraEdit compraEdit);
-    
+
     CompraEdit compraEditToCompra(Compra compra);
-    
+
     CompraInfo compraToCompraInfo(Compra compra);
 
     void updateCompraFromCompraEdit(CompraEdit compraEdit, @MappingTarget Compra compra);

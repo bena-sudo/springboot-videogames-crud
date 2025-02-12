@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CompraServiceImp implements CrudService<CompraEdit, CompraInfo> {
 
-    private CompraRepository compraRepository;
+    private final CompraRepository compraRepository;
 
     @Override
     public CompraEdit create(CompraEdit entity) {
