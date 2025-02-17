@@ -1,25 +1,30 @@
 package edu.alumno.videogames.model.db;
 
-import edu.alumno.videogames.enums.Rol;
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 @Entity
 @Table(name = "usuarios")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Usuario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,12 +33,28 @@ public class Usuario {
     private String nombre;
 
     @NotNull
+    @Column(unique = true)
+    private String nickname;
+
+    @NotNull
     private String email;
 
     @NotNull
-    @Column(name="password_hash")
-    private String passwordHash;
+    private String password;
 
-    @Enumerated(EnumType.STRING)
-    private Rol rol;
+    @NotNull
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "idUsuario"), inverseJoinColumns = @JoinColumn(name = "idRol"))
+    private Set<Rol> roles = new HashSet<>();
+
+    public Usuario(
+            @NotNull String nombre,
+            @NotNull String nickname,
+            @NotNull String email,
+            @NotNull String password) {
+        this.nombre = nombre;
+        this.nickname = nickname;
+        this.email = email;
+        this.password = password;
+    }
 }

@@ -1,8 +1,10 @@
 package edu.alumno.videogames.model.db;
 
-import java.math.BigDecimal;
 
+import edu.alumno.videogames.enums.RolNombre;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,18 +14,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "videojuegos")
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Videojuego {
+@AllArgsConstructor
+@Data
+@Entity
+@Table(name = "roles")
+public class Rol {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
+
     @NotNull
-    private String nombre;
-    private String categoria;
-    private BigDecimal precio;
-    private String imagenBase64;
+    @Enumerated(EnumType.STRING) // Si no, por defecto sería numérico
+    private RolNombre nombre;
 }

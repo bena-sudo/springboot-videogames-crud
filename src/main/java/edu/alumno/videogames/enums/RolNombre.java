@@ -1,6 +1,6 @@
 package edu.alumno.videogames.enums;
 
-public enum Rol {
+public enum RolNombre {
     ADMIN,
     CLIENTE
 }

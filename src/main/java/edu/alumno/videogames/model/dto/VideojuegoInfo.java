@@ -1,5 +1,6 @@
 package edu.alumno.videogames.model.dto;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import lombok.AllArgsConstructor;
@@ -9,7 +10,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class VideojuegoInfo {
+public class VideojuegoInfo implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Long id;
     private String nombre;
     private String categoria;

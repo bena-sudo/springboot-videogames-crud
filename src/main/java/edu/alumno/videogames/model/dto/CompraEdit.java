@@ -1,5 +1,6 @@
 package edu.alumno.videogames.model.dto;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import edu.alumno.videogames.model.db.Usuario;
@@ -12,7 +13,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CompraEdit {
+public class CompraEdit implements Serializable{
+    private static final long serialVersionUID = 1L;
     private Long id;
     @NotNull
     private Usuario usuario;
