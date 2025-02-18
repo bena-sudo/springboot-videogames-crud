@@ -34,6 +34,7 @@ public class CompraController {
         return ResponseEntity.status(HttpStatus.CREATED).body(crudService.create(compraEdit));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/compra/{id}")
     public ResponseEntity<CompraInfo> read(@PathVariable String id) {
         return ResponseEntity.ok(crudService.read(new IdEntityLong(id).getValue()));
