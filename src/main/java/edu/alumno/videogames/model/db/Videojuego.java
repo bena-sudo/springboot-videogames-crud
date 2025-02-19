@@ -25,5 +25,4 @@ public class Videojuego {
     private String nombre;
     private String categoria;
     private BigDecimal precio;
-    private String imagenBase64;
 }

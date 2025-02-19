@@ -1,0 +1,9 @@
+###
+## getAll  
+GET http://localhost:10000/api/videojuegos?filter=nombre:CONTIENE:The HTTP/1.1
+Content-Type: application/json
+
+###
+## getAll (filtrado por nombre)
+GET http://localhost:10000/api/videojuegos?filter=nombre:CONTIENE:The HTTP/1.1
+Content-Type: application/json

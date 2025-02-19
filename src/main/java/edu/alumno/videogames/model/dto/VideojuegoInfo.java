@@ -16,5 +16,4 @@ public class VideojuegoInfo implements Serializable {
     private String nombre;
     private String categoria;
     private BigDecimal precio;
-    private String imagenBase64;
 }
