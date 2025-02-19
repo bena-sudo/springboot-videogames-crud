@@ -47,7 +47,10 @@ public class SecurityConfig {
     private static final String[] WHITE_LIST_URL = { "/auth/**",
             "/api-docs/**",
             "/swagger-ui/**",
-            "/webjars/**" };
+            "/webjars/**",
+            "/api/videojuegos/**",
+            "/api/videojuego/**",
+            "/api/v1/docs/**", };
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
