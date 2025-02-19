@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS usuarios_roles;
 DROP TABLE IF EXISTS compras;
 DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS usuarios;
+DROP TABLE docalumnos;
 DROP TABLE IF EXISTS videojuegos;
 -- Crea la tabla videojuegos
 CREATE TABLE IF NOT EXISTS videojuegos (
@@ -40,6 +41,15 @@ CREATE TABLE IF NOT EXISTS usuarios_roles (
     PRIMARY KEY (idUsuario, idRol),
     CONSTRAINT usuarios_roles_fk_usuarios FOREIGN KEY (idUsuario) REFERENCES usuarios(id) ON DELETE CASCADE,
     CONSTRAINT usuarios_roles_fk_roles FOREIGN KEY (idRol) REFERENCES roles(id) ON DELETE CASCADE
+);
+CREATE TABLE docalumnos (
+    id SERIAL PRIMARY KEY,
+    videojuego_id INT NOT NULL REFERENCES videojuegos(id) ON DELETE CASCADE,
+    nombre_fichero VARCHAR(255) NOT NULL,
+    comentario TEXT,
+    base64_documento TEXT,
+    extension_documento VARCHAR(5),
+    content_type_cocumento VARCHAR(50)
 );
 -- Inserta usuarios
 INSERT INTO usuarios (nombre, nickname, email, password)

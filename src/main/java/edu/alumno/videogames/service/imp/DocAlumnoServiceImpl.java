@@ -29,11 +29,13 @@ import edu.alumno.videogames.repository.DocAlumnoRepository;
 import edu.alumno.videogames.service.DocAlumnoService;
 import edu.alumno.videogames.service.FileDownloadService;
 import edu.alumno.videogames.service.mappers.DocAlumnoMapper;
+import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 @Service
+@RequiredArgsConstructor
 public class DocAlumnoServiceImpl implements DocAlumnoService {
 
     private final DocAlumnoCrudRepository docAlumnoCrudRepository;
@@ -41,22 +43,6 @@ public class DocAlumnoServiceImpl implements DocAlumnoService {
     private final FileDownloadService fileDownloadService;
     private final PaginationFactory paginationFactory;
     private final PeticionListadoFiltradoConverter peticionConverter;
-
-    public DocAlumnoServiceImpl(
-            DocAlumnoCrudRepository docAlumnoCrudRepository,
-            FileDownloadService fileDownloadService,
-            PaginationFactory paginationFactory,
-            PeticionListadoFiltradoConverter peticionConverter) {
-        this.docAlumnoCrudRepository = docAlumnoCrudRepository;
-        this.fileDownloadService = fileDownloadService;
-        this.paginationFactory = paginationFactory;
-        this.peticionConverter = peticionConverter;
-        this.docAlumnoRepository = null;
-    }
-
-    /**
-     * CRUD
-     */
 
     @Override
     public DocAlumnoResponse create(DocAlumnoEdit docAlumnoEdit) {
@@ -136,14 +122,6 @@ public class DocAlumnoServiceImpl implements DocAlumnoService {
  
      @SuppressWarnings("null")
      public PaginaResponse<DocAlumnoList> findAll(PeticionListadoFiltrado peticionListadoFiltrado) throws FiltroException {
-         /**
-          * 'paginationFactory' está en el constructor del service porque utilizando una
-          * buena arquitectura
-          * toda clase externa al Service que contenga un método a ejecutar debería ser
-          * testeable de manera
-          * independiente y para ello debe de estar en el constructor para poderse
-          * mockear.
-          **/
          try {
              Pageable pageable = paginationFactory.createPageable(peticionListadoFiltrado);
              // Configurar criterio de filtrado con Specification
