@@ -8,7 +8,7 @@ public class FiltroException extends RuntimeException {
 
     private final String errorCode;
     private final String message;
-    private String detailedMessage;
+    private final String detailedMessage;
 
     public FiltroException(String errorCode, String message, String detailedMessage) {
         super(message);

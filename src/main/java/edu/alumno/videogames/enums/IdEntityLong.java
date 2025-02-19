@@ -1,4 +1,5 @@
-package edu.alumno.videogames.model;
+package edu.alumno.videogames.enums;
+
 
 import edu.alumno.videogames.exception.DataValidationException;
 import lombok.Value;

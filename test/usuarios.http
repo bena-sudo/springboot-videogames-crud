@@ -66,4 +66,4 @@ Content-Type: application/json
 ## getCompra usuario carlos con JWT 
 GET http://localhost:10000/api/compra/1 HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjYXJsb3MiLCJpYXQiOjE3Mzk4NzAyODYsImV4cCI6MTczOTkwNjI4Nn0.O1uGtqMZtNbZppGUF9CJUjTix52UxurGcGLtcDcF89o
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjYXJsb3MiLCJpYXQiOjE3NDAwMDA3ODEsImV4cCI6MTc0MDAzNjc4MX0.aIyB-eU-11X5U-nLlNl8mQjIYOEKZVacpueCU00pkJ8
