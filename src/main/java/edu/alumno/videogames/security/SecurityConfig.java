@@ -44,13 +44,15 @@ public class SecurityConfig {
         return config.getAuthenticationManager();
     }
 
-    private static final String[] WHITE_LIST_URL = { "/auth/**",
+    private static final String[] WHITE_LIST_URL = {
+            "/auth/**",
             "/api-docs/**",
             "/swagger-ui/**",
             "/webjars/**",
             "/api/videojuegos/**",
             "/api/videojuego/**",
-            "/api/v1/docs/**" };
+            "/api/v1/docs/**"
+    };
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
