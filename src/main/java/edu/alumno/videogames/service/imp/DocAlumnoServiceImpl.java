@@ -120,11 +120,12 @@ public class DocAlumnoServiceImpl implements DocAlumnoService {
          return findAll(peticion);
      }
  
-     @SuppressWarnings("null")
+     @SuppressWarnings({"null", "override"})
      public PaginaResponse<DocAlumnoList> findAll(PeticionListadoFiltrado peticionListadoFiltrado) throws FiltroException {
          try {
              Pageable pageable = paginationFactory.createPageable(peticionListadoFiltrado);
              // Configurar criterio de filtrado con Specification
+             @SuppressWarnings("Convert2Diamond")
              Specification<DocAlumnoDb> filtrosBusquedaSpecification = new FiltroBusquedaSpecification<DocAlumnoDb>(
                      peticionListadoFiltrado.getListaFiltros());
              // Filtrar y ordenar: puede producir cualquier de los errores controlados en el

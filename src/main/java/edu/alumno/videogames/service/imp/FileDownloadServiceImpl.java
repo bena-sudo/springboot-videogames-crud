@@ -14,6 +14,7 @@ import edu.alumno.videogames.service.FileDownloadService;
 @Service
 public class FileDownloadServiceImpl implements FileDownloadService {
 
+    @Override
     public ResponseEntity<byte[]> prepareDownloadResponse(byte[] byteContent, String contentType, String fileName) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.parseMediaType(contentType));
@@ -21,6 +22,7 @@ public class FileDownloadServiceImpl implements FileDownloadService {
         return new ResponseEntity<>(byteContent, headers, HttpStatus.OK);
     }
 
+    @Override
     public ResponseEntity<byte[]> prepareDownloadResponse(String base64Content, String contentType, String fileName) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.parseMediaType(contentType));
