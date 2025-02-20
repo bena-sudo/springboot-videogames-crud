@@ -14,10 +14,10 @@ import lombok.NoArgsConstructor;
 public class VideojuegoEdit implements Serializable{
     private static final long serialVersionUID = 1L;
     private Long id;
-    @NotNull
+    @NotNull(message = "El nombre del videojuego no puede estar vacío")
     private String nombre;
-    @NotNull
+    @NotNull(message = "El nombre de la categoria no puede estar vacía")
     private String categoria;
-    @NotNull
+    @NotNull(message = "El precio del videojuego no puede estar vacío")
     private BigDecimal precio;
 }

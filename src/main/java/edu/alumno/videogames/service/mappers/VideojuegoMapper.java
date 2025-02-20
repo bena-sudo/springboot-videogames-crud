@@ -18,9 +18,9 @@ import edu.alumno.videogames.model.dto.VideojuegoList;
 public interface VideojuegoMapper {
     VideojuegoMapper INSTANCE = Mappers.getMapper(VideojuegoMapper.class);
 
-    Videojuego videojuegoTVideojuegoEdit(VideojuegoEdit videojuegoEdit);
+    VideojuegoEdit videojuegoToVideojuegoEdit(Videojuego videojuego);
 
-    VideojuegoEdit videojuegoEditToVideojuego(Videojuego videojuego);
+    Videojuego videojuegoEditToVideojuego(VideojuegoEdit videojuegoEdit);
 
     VideojuegoInfo videojuegoToVideojuegoInfo(Videojuego videojuego);
 

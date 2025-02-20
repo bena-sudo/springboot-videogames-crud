@@ -21,8 +21,10 @@ public class Videojuego {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
+    @NotNull(message = "El nombre del videojuego no puede estar vacío")
     private String nombre;
+    @NotNull(message = "El nombre de la categoria no puede estar vacía")
     private String categoria;
+    @NotNull(message = "El precio del videojuego no puede estar vacío")
     private BigDecimal precio;
 }
