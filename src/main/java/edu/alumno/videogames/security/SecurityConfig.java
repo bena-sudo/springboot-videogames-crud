@@ -50,7 +50,7 @@ public class SecurityConfig {
             "/webjars/**",
             "/api/videojuegos/**",
             "/api/videojuego/**",
-            "/api/v1/docs/**", };
+            "/api/v1/docs/**" };
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

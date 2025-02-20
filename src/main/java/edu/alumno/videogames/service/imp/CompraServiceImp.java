@@ -46,7 +46,7 @@ public class CompraServiceImp implements CrudService<CompraEdit, CompraInfo> {
                 .orElseThrow(() -> new EntityNotFoundException("COMPRA_NOT_FOUND_FOR_UPDATE",
                         "No se puede actualizar. La compra con ID " + id + " no existe."));
         CompraMapper.INSTANCE.updateCompraFromCompraEdit(entity, existingEntity);
-        return CompraMapper.INSTANCE.compraEditToCompra(existingEntity);
+        return CompraMapper.INSTANCE.compraEditToCompra(compraRepository.save(existingEntity));
     }
 
     @Override

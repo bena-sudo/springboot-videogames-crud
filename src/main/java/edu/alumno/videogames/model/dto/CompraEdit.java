@@ -20,6 +20,5 @@ public class CompraEdit implements Serializable{
     private Usuario usuario;
     @NotNull
     private Videojuego videojuego;
-    @NotNull
     private LocalDateTime fecha;
 }
