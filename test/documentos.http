@@ -1,11 +1,11 @@
 ### Create document OK: PONER UNA RUTA CORRECTA Y NOMBRE FICHERO 'ManualXsara.pdf'
-POST http://localhost:10000/api/v1/docs HTTP/1.1
+POST http://localhost:10000/api/docs HTTP/1.1
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="idVideojuego"
 
-1
+2
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="nombreFichero"
 
@@ -22,145 +22,64 @@ Content-Type: application/pdf
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 ### Read document
-GET http://localhost:10000/api/v1/docs/1 HTTP/1.1
+GET http://localhost:10000/api/docs/1 HTTP/1.1
 Content-Type: application/json
 
 ### Delete document
-DELETE http://localhost:10000/api/v1/docs/1 HTTP/1.1
+DELETE http://localhost:10000/api/docs/1 HTTP/1.1
 Content-Type: application/json
 
 ### Get all documents with filters and sorting
-GET http://localhost:10000/api/v1/docs/search?filter=nombreFichero:CONTIENE:Xsara&sort=nombreFichero&page=0&size=10 HTTP/1.1
+GET http://localhost:10000/api/docs/search?filter=nombreFichero:CONTIENE:Xsara&sort=nombreFichero&page=0&size=10 HTTP/1.1
 Content-Type: application/json
-
-### Error: "errorCode": "STUDENT_DOC_CREATE_VALIDATION"
-POST http://localhost:10000/api/v1/docs HTTP/1.1
-Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
-
-------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="dni"
-
-5A
-------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="nombreFichero"
-
-Doc
-------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="comentario"
-
-Short comment
-------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="multipart"; filename="invalid.txt"
-Content-Type: text/plain
-
-< ./path/to/invalid/file.txt
-------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="creadoPor"
-
-User
-------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 ### Error: "errorCode": "STUDENT_DOC_NOT_FOUND"
-GET http://localhost:10000/api/v1/docs/99999999 HTTP/1.1
+GET http://localhost:10000/api/docs/99999999 HTTP/1.1
 Content-Type: application/json
 
-### Error: "errorCode": "STUDENT_DOC_UPDATE_VALIDATION"
-PUT http://localhost:10000/api/v1/docs/1 HTTP/1.1
-Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
-
-------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="dni"
-
-1A
-------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="nombreFichero"
-
-Doc
-------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="comentario"
-
-Short comment
-------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="multipart"; filename="invalid.txt"
-Content-Type: text/plain
-
-< ./path/to/invalid/file.txt
-------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="creadoPor"
-
-User
-------WebKitFormBoundary7MA4YWxkTrZu0gW--
-
-### Error: "errorCode": "STUDENT_DOC_NOT_FOUND_FOR_UPDATE"
-PUT http://localhost:10000/api/v1/docs/99999999 HTTP/1.1
-Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
-
-------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="dni"
-
-11111111A
-------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="nombreFichero"
-
-Documento_1.pdf
-------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="comentario"
-
-Documento modificado
-------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="multipart"; filename="documento.pdf"
-Content-Type: application/pdf
-
-< ./path/to/modified/document.pdf
-------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="creadoPor"
-
-Simarret
-------WebKitFormBoundary7MA4YWxkTrZu0gW--
-
 ### Error: "errorCode": "ID_FORMAT_INVALID"
-DELETE http://localhost:10000/api/v1/docs/ HTTP/1.1
+DELETE http://localhost:10000/api/docs/ HTTP/1.1
 Content-Type: application/json
 
 ### Get all documents where 'id' is greater than 1
-GET http://localhost:10000/api/v1/docs/search?filter=id:MAYOR_QUE:1&sort=id&page=0&size=10 HTTP/1.1
+GET http://localhost:10000/api/docs/search?filter=id:MAYOR_QUE:1&sort=id&page=0&size=10 HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjYXJsb3MiLCJpYXQiOjE3NDAwMDA3ODEsImV4cCI6MTc0MDAzNjc4MX0.aIyB-eU-11X5U-nLlNl8mQjIYOEKZVacpueCU00pkJ8
 
 
 ### Get all documents where 'id' is less than 5
-GET http://localhost:10000/api/v1/docs/search?filter=id:MENOR_QUE:5&sort=id&page=0&size=10 HTTP/1.1
+GET http://localhost:10000/api/docs/search?filter=id:MENOR_QUE:5&sort=id&page=0&size=10 HTTP/1.1
 Content-Type: application/json
 
 ### Get all documents where 'creadoPor' contains 'Sim'
-GET http://localhost:10000/api/v1/docs/search?filter=creadoPor:CONTIENE:Sim&sort=nombreFichero&page=0&size=10 HTTP/1.1
+GET http://localhost:10000/api/docs/search?filter=creadoPor:CONTIENE:Sim&sort=nombreFichero&page=0&size=10 HTTP/1.1
 Content-Type: application/json
 
 ### Get all documents where 'dni' equals '11111111A'
-GET http://localhost:10000/api/v1/docs/search?filter=dni:IGUAL:11111111A&sort=id&page=0&size=10 HTTP/1.1
+GET http://localhost:10000/api/docs/search?filter=dni:IGUAL:11111111A&sort=id&page=0&size=10 HTTP/1.1
 Content-Type: application/json
 
 ### Error: "errorCode": "BAD_ATTRIBUTE_FILTER"
-GET http://localhost:10000/api/v1/docs/search?filter=invalidAttribute:IGUAL:Simarret&sort=id,asc&page=0&size=10 HTTP/1.1
+GET http://localhost:10000/api/docs/search?filter=invalidAttribute:IGUAL:Simarret&sort=id,asc&page=0&size=10 HTTP/1.1
 Content-Type: application/json
 
 ### Error: "errorCode": "BAD_FILTER"
-GET http://localhost:10000/api/v1/docs/search?filter=id:INVALID_OPERATOR:1&sort=id,asc&page=0&size=10 HTTP/1.1
+GET http://localhost:10000/api/docs/search?filter=id:INVALID_OPERATOR:1&sort=id,asc&page=0&size=10 HTTP/1.1
 Content-Type: application/json
 
 ### Error: "errorCode": "BAD_ATTRIBUTE_ORDER"
-GET http://localhost:10000/api/v1/docs/search?filter=id:IGUAL:1&sort=invalidSortAttribute,asc&page=0&size=10 HTTP/1.1
+GET http://localhost:10000/api/docs/search?filter=id:IGUAL:1&sort=invalidSortAttribute,asc&page=0&size=10 HTTP/1.1
 Content-Type: application/json
 
 ### Error: "errorCode": "BAD_OPERATOR_FILTER"
-GET http://localhost:10000/api/v1/docs/search?filter=id:CONTIENE:1&sort=id,asc&page=0&size=10 HTTP/1.1
+GET http://localhost:10000/api/docs/search?filter=id:CONTIENE:1&sort=id,asc&page=0&size=10 HTTP/1.1
 Content-Type: application/json
 
 ### preview ok: Tambien se puede copiar la url y pegarla en el navegador
 ## para comprobar que realmente hacemos la previsualización
-GET http://localhost:10000/api/v1/docs/preview/4 HTTP/1.1
+GET http://localhost:10000/api/docs/preview/4 HTTP/1.1
 Content-Type: application/json
 
 ### preview 'STUDENT_DOC_NOT_FOUND'
-GET http://localhost:10000/api/v1/docs/preview/1 HTTP/1.1
+GET http://localhost:10000/api/docs/preview/1 HTTP/1.1
 Content-Type: application/json

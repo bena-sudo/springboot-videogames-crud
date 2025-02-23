@@ -4,6 +4,7 @@ POST http://localhost:10000/api/videojuego HTTP/1.1
 Content-Type: application/json
 
 {
+    "id": null,
     "nombre": "Simarro Kong",
     "categoria": "Aventura",
     "precio": 39.99
@@ -11,7 +12,7 @@ Content-Type: application/json
 
 ###
 ##  read
-GET http://localhost:10000/api/videojuego/1 HTTP/1.1
+GET http://localhost:10000/api/videojuego/2 HTTP/1.1
 Content-Type: application/json
 
 ###
@@ -49,4 +50,9 @@ Content-Type: application/json
 ###
 ## getAll (filtrado por categoria)
 GET http://localhost:10000/api/videojuegos?filter=categoria:IGUAL:Aventura HTTP/1.1
+Content-Type: application/json
+
+###
+## getAll (filtrado por categoria)
+GET http://localhost:10000/api/videojuegos?filter=categria:IGUAL:Aventura HTTP/1.1
 Content-Type: application/json
