@@ -85,6 +85,7 @@
 			<version>${org.mapstruct.version}</version>
 			<scope>compile</scope>
 		</dependency>
+		<!-- Documentar APIs con OpenAPI y Swagger-->
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
