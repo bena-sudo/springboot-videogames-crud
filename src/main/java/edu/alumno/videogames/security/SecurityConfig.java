@@ -51,7 +51,7 @@ public class SecurityConfig {
             "/webjars/**",
             "/api/videojuegos/**",
             "/api/videojuego/**",
-            "/api/v1/docs/**"
+            "/api/docs/**"
     };
 
     @Bean

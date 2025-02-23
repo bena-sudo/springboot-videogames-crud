@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class VideojuegoEdit implements Serializable{
     private static final long serialVersionUID = 1L;
+
     private Long id;
     @NotNull(message = "El nombre del videojuego no puede estar vacío")
     private String nombre;

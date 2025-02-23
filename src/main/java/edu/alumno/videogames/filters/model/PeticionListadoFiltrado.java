@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class PeticionListadoFiltrado implements Serializable {
+public class PeticionListadoFiltrado implements Serializable{
     private static final long serialVersionUID = 1L;
-
+    
     private List<FiltroBusqueda> listaFiltros;
     private Integer page;
     private Integer size;

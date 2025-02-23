@@ -1,5 +1,6 @@
 package edu.alumno.videogames.model.db;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import jakarta.persistence.Entity;
@@ -17,7 +18,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Videojuego {
+public class Videojuego implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

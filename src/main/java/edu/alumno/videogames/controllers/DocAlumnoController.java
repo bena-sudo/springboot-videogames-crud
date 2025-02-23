@@ -31,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/docs")
+@RequestMapping("/api/docs")
 @CrossOrigin
 public class DocAlumnoController {
 

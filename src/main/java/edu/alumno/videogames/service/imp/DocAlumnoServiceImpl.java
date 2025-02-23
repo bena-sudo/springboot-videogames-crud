@@ -2,8 +2,9 @@ package edu.alumno.videogames.service.imp;
 
 import java.util.List;
 
-
 import org.springframework.dao.InvalidDataAccessApiUsageException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.http.ResponseEntity;
@@ -31,9 +32,6 @@ import edu.alumno.videogames.service.FileDownloadService;
 import edu.alumno.videogames.service.mappers.DocAlumnoMapper;
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
 @Service
 @RequiredArgsConstructor
 public class DocAlumnoServiceImpl implements DocAlumnoService {
@@ -46,7 +44,7 @@ public class DocAlumnoServiceImpl implements DocAlumnoService {
 
     @Override
     public DocAlumnoResponse create(DocAlumnoEdit docAlumnoEdit) {
-        // Validar que dni y multipart no sean nulos
+        // Validar que el id y multipart no sean nulos
         if (docAlumnoEdit.getMultipart() == null || docAlumnoEdit.getMultipart().isEmpty()) {
             throw new MultipartProcessingException("BAD_MULTIPART", "El archivo no puede estar vacío");
         }
@@ -105,54 +103,63 @@ public class DocAlumnoServiceImpl implements DocAlumnoService {
      * LISTADOS
      */
 
-     @Override
-     public PaginaResponse<DocAlumnoList> findAll(List<String> filter, int page, int size, List<String> sort)
-             throws FiltroException {
-         /**
-          * 'peticionConverter' está en el constructor del service porque utilizando una
-          * buena arquitectura
-          * toda clase externa al Service que contenga un método a ejecutar debería ser
-          * testeable de manera
-          * independiente y para ello debe de estar en el constructor para poderse
-          * mockear.
-          **/
-         PeticionListadoFiltrado peticion = peticionConverter.convertFromParams(filter, page, size, sort);
-         return findAll(peticion);
-     }
- 
-     @SuppressWarnings({"null", "override"})
-     public PaginaResponse<DocAlumnoList> findAll(PeticionListadoFiltrado peticionListadoFiltrado) throws FiltroException {
-         try {
-             Pageable pageable = paginationFactory.createPageable(peticionListadoFiltrado);
-             // Configurar criterio de filtrado con Specification
-             @SuppressWarnings("Convert2Diamond")
-             Specification<DocAlumnoDb> filtrosBusquedaSpecification = new FiltroBusquedaSpecification<DocAlumnoDb>(
-                     peticionListadoFiltrado.getListaFiltros());
-             // Filtrar y ordenar: puede producir cualquier de los errores controlados en el
-             // catch
-             Page<DocAlumnoDb> page = docAlumnoRepository.findAll(filtrosBusquedaSpecification, pageable);
-             // Devolver respuesta
-             return DocAlumnoMapper.pageToPaginaResponseAlumnoList(
-                     page,
-                     peticionListadoFiltrado.getListaFiltros(),
-                     peticionListadoFiltrado.getSort());
-         } catch (JpaSystemException e) {
-             String cause = "";
-             if (e.getRootCause() != null) {
-                 if (e.getCause().getMessage() != null)
-                     cause = e.getRootCause().getMessage();
-             }
-             throw new FiltroException("BAD_OPERATOR_FILTER",
-                     "Error: No se puede realizar esa operación sobre el atributo por el tipo de dato",
-                     e.getMessage() + ":" + cause);
-         } catch (PropertyReferenceException e) {
-             throw new FiltroException("BAD_ATTRIBUTE_ORDER",
-                     "Error: No existe el nombre del atributo de ordenación en la tabla", e.getMessage());
-         } catch (InvalidDataAccessApiUsageException e) {
-             throw new FiltroException("BAD_ATTRIBUTE_FILTER", "Error: Posiblemente no existe el atributo en la tabla",
-                     e.getMessage());
-         }
-     }
+    @Override
+    public PaginaResponse<DocAlumnoList> findAll(List<String> filter, int page, int size, List<String> sort)
+            throws FiltroException {
+        /**
+         * 'peticionConverter' está en el constructor del service porque utilizando una
+         * buena arquitectura
+         * toda clase externa al Service que contenga un método a ejecutar debería ser
+         * testeable de manera
+         * independiente y para ello debe de estar en el constructor para poderse
+         * mockear.
+         **/
+        PeticionListadoFiltrado peticion = peticionConverter.convertFromParams(filter, page, size, sort);
+        return findAll(peticion);
+    }
 
-     
+    @SuppressWarnings("null")
+    @Override
+    public PaginaResponse<DocAlumnoList> findAll(PeticionListadoFiltrado peticionListadoFiltrado)
+            throws FiltroException {
+        /**
+         * 'paginationFactory' está en el constructor del service porque utilizando una
+         * buena arquitectura
+         * toda clase externa al Service que contenga un método a ejecutar debería ser
+         * testeable de manera
+         * independiente y para ello debe de estar en el constructor para poderse
+         * mockear.
+         **/
+        try {
+            Pageable pageable = paginationFactory.createPageable(peticionListadoFiltrado);
+            // Configurar criterio de filtrado con Specification
+            @SuppressWarnings("Convert2Diamond")
+            Specification<DocAlumnoDb> filtrosBusquedaSpecification = new FiltroBusquedaSpecification<DocAlumnoDb>(
+                    peticionListadoFiltrado.getListaFiltros());
+            // Filtrar y ordenar: puede producir cualquier de los errores controlados en el
+            // catch
+            Page<DocAlumnoDb> page = docAlumnoRepository.findAll(filtrosBusquedaSpecification, pageable);
+            // Devolver respuesta
+            return DocAlumnoMapper.pageToPaginaResponseAlumnoList(
+                    page,
+                    peticionListadoFiltrado.getListaFiltros(),
+                    peticionListadoFiltrado.getSort());
+        } catch (JpaSystemException e) {
+            String cause = "";
+            if (e.getRootCause() != null) {
+                if (e.getCause().getMessage() != null)
+                    cause = e.getRootCause().getMessage();
+            }
+            throw new FiltroException("BAD_OPERATOR_FILTER",
+                    "Error: No se puede realizar esa operación sobre el atributo por el tipo de dato",
+                    e.getMessage() + ":" + cause);
+        } catch (PropertyReferenceException e) {
+            throw new FiltroException("BAD_ATTRIBUTE_ORDER",
+                    "Error: No existe el nombre del atributo de ordenación en la tabla", e.getMessage());
+        } catch (InvalidDataAccessApiUsageException e) {
+            throw new FiltroException("BAD_ATTRIBUTE_FILTER", "Error: Posiblemente no existe el atributo en la tabla",
+                    e.getMessage());
+        }
+    }
+
 }

@@ -27,18 +27,14 @@ public class FiltroBusquedaFactory {
         if (filtros == null || filtros.isEmpty()) {
             return Collections.emptyList();
         }
-
         try {
             return filtros.stream()
                     .map(FiltroBusquedaFactory::createFiltro)
                     .collect(Collectors.toList());
         } catch (IllegalArgumentException e) {
-            throw new FiltroException(
-                    "BAD_FILTER",
-                    "Error: Filtro incorrecto",
-                    e.getMessage());
+            throw new FiltroException("BAD_FILTER",
+                    "Error: Filtro incorrecto", e.getMessage());
         }
-
     }
 
     private static FiltroBusqueda createFiltro(String filtro) {
@@ -55,6 +51,7 @@ public class FiltroBusquedaFactory {
 
         String atributo = partes[0].trim();
         String operacionTexto = partes[1].trim();
+        // Concatenar las partes restantes para el valor si hay más de 3 partes
         String valor = Arrays.stream(partes, 2, partes.length)
                 .reduce((a, b) -> a + separador.toString() + b)
                 .orElse("").trim();
