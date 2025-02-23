@@ -16,8 +16,8 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 
-@Table(name = "docalumnos")
-public class DocAlumnoDb {
+@Table(name = "docvideojuegos")
+public class DocumentoVideojuegoDB {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

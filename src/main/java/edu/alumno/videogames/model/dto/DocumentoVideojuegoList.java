@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class DocAlumnoList {
+public class DocumentoVideojuegoList {
     @Schema(example = "1", description = "Identificador único del documento")
     private Long id;
 

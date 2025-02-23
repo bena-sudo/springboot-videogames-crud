@@ -20,59 +20,60 @@ import edu.alumno.videogames.filters.model.PeticionListadoFiltrado;
 import edu.alumno.videogames.filters.specification.FiltroBusquedaSpecification;
 import edu.alumno.videogames.filters.utils.PaginationFactory;
 import edu.alumno.videogames.filters.utils.PeticionListadoFiltradoConverter;
-import edu.alumno.videogames.model.db.DocAlumnoDb;
-import edu.alumno.videogames.model.db.DocAlumnoEditDb;
-import edu.alumno.videogames.model.dto.DocAlumnoEdit;
-import edu.alumno.videogames.model.dto.DocAlumnoList;
-import edu.alumno.videogames.model.dto.DocAlumnoResponse;
-import edu.alumno.videogames.repository.DocAlumnoCrudRepository;
-import edu.alumno.videogames.repository.DocAlumnoRepository;
-import edu.alumno.videogames.service.DocAlumnoService;
+import edu.alumno.videogames.model.db.DocumentoVideojuegoDB;
+import edu.alumno.videogames.model.db.DocumentoVideojuegoEditDB;
+import edu.alumno.videogames.model.dto.DocumentoVideojuegoEdit;
+import edu.alumno.videogames.model.dto.DocumentoVideojuegoList;
+import edu.alumno.videogames.model.dto.DocumentoVideojuegoResponse;
+import edu.alumno.videogames.repository.DocumentoVideojuegoCrudRepository;
+import edu.alumno.videogames.repository.DocumentoVideojuegoRepository;
+import edu.alumno.videogames.service.DocumentoVideojuegoService;
 import edu.alumno.videogames.service.FileDownloadService;
-import edu.alumno.videogames.service.mappers.DocAlumnoMapper;
+import edu.alumno.videogames.service.mappers.DocumentoVideojuegoMapper;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class DocAlumnoServiceImpl implements DocAlumnoService {
+public class DocumentoVideojuegoServiceImpl implements DocumentoVideojuegoService {
 
-    private final DocAlumnoCrudRepository docAlumnoCrudRepository;
-    private final DocAlumnoRepository docAlumnoRepository;
+    private final DocumentoVideojuegoCrudRepository documentoVideojuegoCrudRepository;
+    private final DocumentoVideojuegoRepository documentoVideojuegoRepository;
     private final FileDownloadService fileDownloadService;
     private final PaginationFactory paginationFactory;
     private final PeticionListadoFiltradoConverter peticionConverter;
 
     @Override
-    public DocAlumnoResponse create(DocAlumnoEdit docAlumnoEdit) {
+    public DocumentoVideojuegoResponse create(DocumentoVideojuegoEdit documentoVideojuegoEdit) {
         // Validar que el id y multipart no sean nulos
-        if (docAlumnoEdit.getMultipart() == null || docAlumnoEdit.getMultipart().isEmpty()) {
+        if (documentoVideojuegoEdit.getMultipart() == null || documentoVideojuegoEdit.getMultipart().isEmpty()) {
             throw new MultipartProcessingException("BAD_MULTIPART", "El archivo no puede estar vacío");
         }
-        if (docAlumnoEdit.getId() != null) { // Como el id lo crea la BD no debemos pasarle un valor inicial
-            throw new EntityIllegalArgumentException("STUDENT_DOC_ID_MISMATCH",
+        if (documentoVideojuegoEdit.getId() != null) { // Como el id lo crea la BD no debemos pasarle un valor inicial
+            throw new EntityIllegalArgumentException("VIDEOJUEGO_DOC_ID_MISMATCH",
                     "El ID debe ser nulo al crear un nuevo documento.");
         }
 
         // Mapear y guardar
-        DocAlumnoEditDb entity = DocAlumnoMapper.INSTANCE.docAlumnoEditToDocAlumnoEditDb(docAlumnoEdit);
-        DocAlumnoEditDb savedEntity = docAlumnoCrudRepository.save(entity);
+        DocumentoVideojuegoEditDB entity = DocumentoVideojuegoMapper.INSTANCE
+                .docVideojuegoEditToDocVideojuegoEditDb(documentoVideojuegoEdit);
+        DocumentoVideojuegoEditDB savedEntity = documentoVideojuegoCrudRepository.save(entity);
 
         // Devolver el DTO mapeado
-        return DocAlumnoMapper.INSTANCE.docAlumnoEditDbToDocAlumnoResponse(savedEntity);
+        return DocumentoVideojuegoMapper.INSTANCE.docVideojuegoEditDbToDocVideojuegoResponse(savedEntity);
     }
 
     @Override
-    public DocAlumnoResponse read(Long id) {
-        DocAlumnoEditDb entity = docAlumnoCrudRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("STUDENT_DOC_NOT_FOUND",
+    public DocumentoVideojuegoResponse read(Long id) {
+        DocumentoVideojuegoEditDB entity = documentoVideojuegoCrudRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("VIDEOJUEGO_DOC_NOT_FOUND",
                         "No se encontró el documento con ID " + id));
-        return DocAlumnoMapper.INSTANCE.docAlumnoEditDbToDocAlumnoResponse(entity);
+        return DocumentoVideojuegoMapper.INSTANCE.docVideojuegoEditDbToDocVideojuegoResponse(entity);
     }
 
     @Override
     public ResponseEntity<byte[]> getDocumentForPreview(Long id) {
-        DocAlumnoEditDb doc = docAlumnoCrudRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("STUDENT_DOC_NOT_FOUND",
+        DocumentoVideojuegoEditDB doc = documentoVideojuegoCrudRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("VIDEOJUEGO_DOC_NOT_FOUND",
                         "No se encontró el documento con ID " + id));
 
         return fileDownloadService.prepareDownloadResponse(
@@ -82,20 +83,21 @@ public class DocAlumnoServiceImpl implements DocAlumnoService {
     }
 
     @Override
-    public DocAlumnoResponse update(Long id, DocAlumnoEdit docAlumnoEdit) {
-        DocAlumnoEditDb existingEntity = docAlumnoCrudRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("STUDENT_DOC_NOT_FOUND",
+    public DocumentoVideojuegoResponse update(Long id, DocumentoVideojuegoEdit documentoVideojuegoEdit) {
+        DocumentoVideojuegoEditDB existingEntity = documentoVideojuegoCrudRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("VIDEOJUEGO_DOC_NOT_FOUND",
                         "No se puede actualizar. El documento con ID " + id + " no existe."));
 
-        DocAlumnoMapper.INSTANCE.updateDocAlumnoEditDbFromDocAlumnoEdit(docAlumnoEdit, existingEntity);
-        return DocAlumnoMapper.INSTANCE
-                .docAlumnoEditDbToDocAlumnoResponse(docAlumnoCrudRepository.save(existingEntity));
+        DocumentoVideojuegoMapper.INSTANCE.updateDocVideojuegoEditDbFromDocVideojuegoEdit(documentoVideojuegoEdit,
+                existingEntity);
+        return DocumentoVideojuegoMapper.INSTANCE
+                .docVideojuegoEditDbToDocVideojuegoResponse(documentoVideojuegoCrudRepository.save(existingEntity));
     }
 
     @Override
     public void delete(Long id) {
-        if (docAlumnoCrudRepository.existsById(id)) {
-            docAlumnoCrudRepository.deleteById(id);
+        if (documentoVideojuegoCrudRepository.existsById(id)) {
+            documentoVideojuegoCrudRepository.deleteById(id);
         }
     }
 
@@ -104,7 +106,7 @@ public class DocAlumnoServiceImpl implements DocAlumnoService {
      */
 
     @Override
-    public PaginaResponse<DocAlumnoList> findAll(List<String> filter, int page, int size, List<String> sort)
+    public PaginaResponse<DocumentoVideojuegoList> findAll(List<String> filter, int page, int size, List<String> sort)
             throws FiltroException {
         /**
          * 'peticionConverter' está en el constructor del service porque utilizando una
@@ -120,7 +122,7 @@ public class DocAlumnoServiceImpl implements DocAlumnoService {
 
     @SuppressWarnings("null")
     @Override
-    public PaginaResponse<DocAlumnoList> findAll(PeticionListadoFiltrado peticionListadoFiltrado)
+    public PaginaResponse<DocumentoVideojuegoList> findAll(PeticionListadoFiltrado peticionListadoFiltrado)
             throws FiltroException {
         /**
          * 'paginationFactory' está en el constructor del service porque utilizando una
@@ -134,13 +136,14 @@ public class DocAlumnoServiceImpl implements DocAlumnoService {
             Pageable pageable = paginationFactory.createPageable(peticionListadoFiltrado);
             // Configurar criterio de filtrado con Specification
             @SuppressWarnings("Convert2Diamond")
-            Specification<DocAlumnoDb> filtrosBusquedaSpecification = new FiltroBusquedaSpecification<DocAlumnoDb>(
+            Specification<DocumentoVideojuegoDB> filtrosBusquedaSpecification = new FiltroBusquedaSpecification<DocumentoVideojuegoDB>(
                     peticionListadoFiltrado.getListaFiltros());
             // Filtrar y ordenar: puede producir cualquier de los errores controlados en el
             // catch
-            Page<DocAlumnoDb> page = docAlumnoRepository.findAll(filtrosBusquedaSpecification, pageable);
+            Page<DocumentoVideojuegoDB> page = documentoVideojuegoRepository.findAll(filtrosBusquedaSpecification,
+                    pageable);
             // Devolver respuesta
-            return DocAlumnoMapper.pageToPaginaResponseAlumnoList(
+            return DocumentoVideojuegoMapper.pageToPaginaResponseVideojuegoList(
                     page,
                     peticionListadoFiltrado.getListaFiltros(),
                     peticionListadoFiltrado.getSort());

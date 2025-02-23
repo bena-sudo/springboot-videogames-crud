@@ -22,10 +22,10 @@ import edu.alumno.videogames.exception.FiltroException;
 import edu.alumno.videogames.filters.model.PaginaResponse;
 import edu.alumno.videogames.filters.model.PeticionListadoFiltrado;
 import edu.alumno.videogames.helper.BindingResultHelper;
-import edu.alumno.videogames.model.dto.DocAlumnoEdit;
-import edu.alumno.videogames.model.dto.DocAlumnoList;
-import edu.alumno.videogames.model.dto.DocAlumnoResponse;
-import edu.alumno.videogames.service.DocAlumnoService;
+import edu.alumno.videogames.model.dto.DocumentoVideojuegoEdit;
+import edu.alumno.videogames.model.dto.DocumentoVideojuegoList;
+import edu.alumno.videogames.model.dto.DocumentoVideojuegoResponse;
+import edu.alumno.videogames.service.DocumentoVideojuegoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -33,52 +33,56 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/api/docs")
 @CrossOrigin
-public class DocAlumnoController {
+public class DocumentoVideojuegoController {
 
-        private final DocAlumnoService docAlumnoService;
+        private final DocumentoVideojuegoService documentoVideojuegoService;
 
         @PostMapping(consumes = "multipart/form-data")
-        public ResponseEntity<DocAlumnoResponse> create(@Valid @ModelAttribute DocAlumnoEdit docAlumnoEdit,
+        public ResponseEntity<DocumentoVideojuegoResponse> create(
+                        @Valid @ModelAttribute DocumentoVideojuegoEdit documentoVideojuegoEdit,
                         BindingResult bindingResult) {
-                BindingResultHelper.validateBindingResult(bindingResult, "DOC_ALUMNO_CREATE_VALIDATION");
-                return ResponseEntity.status(HttpStatus.CREATED).body(docAlumnoService.create(docAlumnoEdit));
+                BindingResultHelper.validateBindingResult(bindingResult, "DOC_VIDEOJUEGO_CREATE_VALIDATION");
+                return ResponseEntity.status(HttpStatus.CREATED)
+                                .body(documentoVideojuegoService.create(documentoVideojuegoEdit));
         }
 
         @GetMapping("/{id}")
-        public ResponseEntity<DocAlumnoResponse> read(@PathVariable String id) {
-                return ResponseEntity.ok(docAlumnoService.read(new IdEntityLong(id).getValue()));
+        public ResponseEntity<DocumentoVideojuegoResponse> read(@PathVariable String id) {
+                return ResponseEntity.ok(documentoVideojuegoService.read(new IdEntityLong(id).getValue()));
         }
 
         @GetMapping("/preview/{id}")
         public ResponseEntity<byte[]> previewDocument(@PathVariable String id) {
-                return docAlumnoService.getDocumentForPreview(new IdEntityLong(id).getValue());
+                return documentoVideojuegoService.getDocumentForPreview(new IdEntityLong(id).getValue());
         }
 
         @PutMapping("/{id}")
-        public ResponseEntity<DocAlumnoResponse> update(@PathVariable String id,
-                        @Valid @ModelAttribute DocAlumnoEdit docAlumnoEdit, BindingResult bindingResult) {
-                BindingResultHelper.validateBindingResult(bindingResult, "DOC_ALUMNO_UPDATE_VALIDATION");
-                return ResponseEntity.ok(docAlumnoService.update(new IdEntityLong(id).getValue(), docAlumnoEdit));
+        public ResponseEntity<DocumentoVideojuegoResponse> update(@PathVariable String id,
+                        @Valid @ModelAttribute DocumentoVideojuegoEdit documentoVideojuegoEdit,
+                        BindingResult bindingResult) {
+                BindingResultHelper.validateBindingResult(bindingResult, "DOC_VIDEOJUEGO_UPDATE_VALIDATION");
+                return ResponseEntity.ok(documentoVideojuegoService.update(new IdEntityLong(id).getValue(),
+                                documentoVideojuegoEdit));
         }
 
         @DeleteMapping("/{id}")
         public ResponseEntity<Void> delete(@PathVariable String id) {
-                docAlumnoService.delete(new IdEntityLong(id).getValue());
+                documentoVideojuegoService.delete(new IdEntityLong(id).getValue());
                 return ResponseEntity.noContent().build();
         }
 
         @GetMapping("/search")
-        public ResponseEntity<PaginaResponse<DocAlumnoList>> getAllDocsGET(
+        public ResponseEntity<PaginaResponse<DocumentoVideojuegoList>> getAllDocsGET(
                         @RequestParam(required = false) List<String> filter,
                         @RequestParam(defaultValue = "0") int page,
                         @RequestParam(defaultValue = "3") int size,
                         @RequestParam(defaultValue = "id") List<String> sort) throws FiltroException {
-                return ResponseEntity.ok(docAlumnoService.findAll(filter, page, size, sort));
+                return ResponseEntity.ok(documentoVideojuegoService.findAll(filter, page, size, sort));
         }
 
         @PostMapping("/search")
-        public ResponseEntity<PaginaResponse<DocAlumnoList>> getAllDocsPOST(
+        public ResponseEntity<PaginaResponse<DocumentoVideojuegoList>> getAllDocsPOST(
                         @Valid @RequestBody PeticionListadoFiltrado peticionListadoFiltrado) throws FiltroException {
-                return ResponseEntity.ok(docAlumnoService.findAll(peticionListadoFiltrado));
+                return ResponseEntity.ok(documentoVideojuegoService.findAll(peticionListadoFiltrado));
         }
 }

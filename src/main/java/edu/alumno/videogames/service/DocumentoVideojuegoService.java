@@ -14,11 +14,11 @@ import edu.alumno.videogames.exception.FiltroException;
 import edu.alumno.videogames.exception.responseHelpers.MultipartProcessingException;
 import edu.alumno.videogames.filters.model.PaginaResponse;
 import edu.alumno.videogames.filters.model.PeticionListadoFiltrado;
-import edu.alumno.videogames.model.dto.DocAlumnoEdit;
-import edu.alumno.videogames.model.dto.DocAlumnoList;
-import edu.alumno.videogames.model.dto.DocAlumnoResponse;
+import edu.alumno.videogames.model.dto.DocumentoVideojuegoEdit;
+import edu.alumno.videogames.model.dto.DocumentoVideojuegoList;
+import edu.alumno.videogames.model.dto.DocumentoVideojuegoResponse;
 
-public interface DocAlumnoService {
+public interface DocumentoVideojuegoService {
 
     /**
      * Crea un nuevo documento en el sistema para un alumno.
@@ -31,7 +31,7 @@ public interface DocAlumnoService {
      * @throws DataIntegrityViolationException Si hay errores al almacenar el registro en la BD (clave ajena, restricción de unicidad, integridad de datos).
      * @throws MultipartProcessingException Si hay un problema al procesar el archivo multipart.
      */
-    DocAlumnoResponse create(DocAlumnoEdit docAlumnoEdit);
+    DocumentoVideojuegoResponse create(DocumentoVideojuegoEdit documentoVideojuegoEdit);
 
     /**
      * Lee un documento del sistema por su ID.
@@ -40,7 +40,7 @@ public interface DocAlumnoService {
      * @return El objeto DTO del documento encontrado.
      * @throws EntityNotFoundException Si no se encuentra un documento con el ID especificado.
      */
-    DocAlumnoResponse read(Long id);
+    DocumentoVideojuegoResponse read(Long id);
 
     /**
      * Actualiza un documento existente en el sistema.
@@ -53,7 +53,7 @@ public interface DocAlumnoService {
      * @throws EntityNotFoundException Si no se encuentra un documento con el ID especificado.
      * @throws DataIntegrityViolationException Si hay errores al almacenar el registro en la BD (clave ajena, restricción de unicidad, integridad de datos).
      */
-    DocAlumnoResponse update(Long id, DocAlumnoEdit docAlumnoEdit);
+    DocumentoVideojuegoResponse update(Long id, DocumentoVideojuegoEdit documentoVideojuegoEdit);
 
     /**
      * Elimina un documento del sistema.
@@ -72,7 +72,7 @@ public interface DocAlumnoService {
      * @return Una respuesta con la lista paginada de documentos en formato DocAlumnoList.
      * @throws FiltroException Si ocurre un error en la aplicación de filtros.
      */
-    PaginaResponse<DocAlumnoList> findAll(List<String> filter, int page, int size, List<String> sort) throws FiltroException;
+    PaginaResponse<DocumentoVideojuegoList> findAll(List<String> filter, int page, int size, List<String> sort) throws FiltroException;
 
 
     /**
@@ -82,7 +82,7 @@ public interface DocAlumnoService {
      * @return Una respuesta con la lista paginada de documentos en formato DocAlumnoList.
      * @throws FiltroException Si ocurre un error en la aplicación de filtros.
      */
-    PaginaResponse<DocAlumnoList> findAll(PeticionListadoFiltrado peticionListadoFiltrado) throws FiltroException;
+    PaginaResponse<DocumentoVideojuegoList> findAll(PeticionListadoFiltrado peticionListadoFiltrado) throws FiltroException;
 
     /**
      * Previsualiza el archivo subido en DocAlumno almacenado como una cadena Base64 en el campo base64Documento.

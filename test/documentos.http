@@ -25,15 +25,11 @@ Content-Type: application/pdf
 GET http://localhost:10000/api/docs/1 HTTP/1.1
 Content-Type: application/json
 
-### Delete document
-DELETE http://localhost:10000/api/docs/1 HTTP/1.1
-Content-Type: application/json
-
 ### Get all documents with filters and sorting
 GET http://localhost:10000/api/docs/search?filter=nombreFichero:CONTIENE:Xsara&sort=nombreFichero&page=0&size=10 HTTP/1.1
 Content-Type: application/json
 
-### Error: "errorCode": "STUDENT_DOC_NOT_FOUND"
+### Error: "errorCode": "VIDEOJUEGO_DOC_NOT_FOUND"
 GET http://localhost:10000/api/docs/99999999 HTTP/1.1
 Content-Type: application/json
 
@@ -44,19 +40,17 @@ Content-Type: application/json
 ### Get all documents where 'id' is greater than 1
 GET http://localhost:10000/api/docs/search?filter=id:MAYOR_QUE:1&sort=id&page=0&size=10 HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjYXJsb3MiLCJpYXQiOjE3NDAwMDA3ODEsImV4cCI6MTc0MDAzNjc4MX0.aIyB-eU-11X5U-nLlNl8mQjIYOEKZVacpueCU00pkJ8
-
 
 ### Get all documents where 'id' is less than 5
 GET http://localhost:10000/api/docs/search?filter=id:MENOR_QUE:5&sort=id&page=0&size=10 HTTP/1.1
 Content-Type: application/json
 
-### Get all documents where 'creadoPor' contains 'Sim'
-GET http://localhost:10000/api/docs/search?filter=creadoPor:CONTIENE:Sim&sort=nombreFichero&page=0&size=10 HTTP/1.1
+### Get all documents where 'nombreFichero' contains 'Man'
+GET http://localhost:10000/api/docs/search?filter=nombreFichero:CONTIENE:Man&sort=nombreFichero&page=0&size=10 HTTP/1.1
 Content-Type: application/json
 
-### Get all documents where 'dni' equals '11111111A'
-GET http://localhost:10000/api/docs/search?filter=dni:IGUAL:11111111A&sort=id&page=0&size=10 HTTP/1.1
+### Get all documents where 'idVideojuego' equals '2'
+GET http://localhost:10000/api/docs/search?filter=idVideojuego:IGUAL:2&sort=id&page=0&size=10 HTTP/1.1
 Content-Type: application/json
 
 ### Error: "errorCode": "BAD_ATTRIBUTE_FILTER"
@@ -77,9 +71,13 @@ Content-Type: application/json
 
 ### preview ok: Tambien se puede copiar la url y pegarla en el navegador
 ## para comprobar que realmente hacemos la previsualización
-GET http://localhost:10000/api/docs/preview/4 HTTP/1.1
+GET http://localhost:10000/api/docs/preview/1 HTTP/1.1
 Content-Type: application/json
 
-### preview 'STUDENT_DOC_NOT_FOUND'
-GET http://localhost:10000/api/docs/preview/1 HTTP/1.1
+### preview 'VIDEOJUEGO_DOC_NOT_FOUND'
+GET http://localhost:10000/api/docs/preview/2 HTTP/1.1
+Content-Type: application/json
+
+### Delete document
+DELETE http://localhost:10000/api/docs/1 HTTP/1.1
 Content-Type: application/json

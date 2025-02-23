@@ -7,11 +7,11 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
-import edu.alumno.videogames.model.db.DocAlumnoDb;
+import edu.alumno.videogames.model.db.DocumentoVideojuegoDB;
 
 @Repository
-public interface DocAlumnoRepository extends JpaRepository<DocAlumnoDb, Long>, JpaSpecificationExecutor<DocAlumnoDb> {
+public interface DocumentoVideojuegoRepository extends JpaRepository<DocumentoVideojuegoDB, Long>, JpaSpecificationExecutor<DocumentoVideojuegoDB> {
     @NonNull
     @SuppressWarnings("override")
-    Page<DocAlumnoDb> findAll(@NonNull Pageable pageable);
+    Page<DocumentoVideojuegoDB> findAll(@NonNull Pageable pageable);
 }
