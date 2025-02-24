@@ -45,9 +45,9 @@ Content-Type: application/json
 
 ###
 ## getCompra usuario pedro con JWT 
-GET http://localhost:10000/api/compra/1 HTTP/1.1
+GET http://localhost:10000/api/compra/2 HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjYXJsb3MiLCJpYXQiOjE3Mzk4NzAyODYsImV4cCI6MTczOTkwNjI4Nn0.O1uGtqMZtNbZppGUF9CJUjTix52UxurGcGLtcDcF89o
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZWRybyIsImlhdCI6MTc0MDQxOTU0MywiZXhwIjoxNzQwNDU1NTQzfQ.IeN3HCHVfDtsE7bXb5FMp6sSYABSgOsE5eVCfHvMkf4
 
 ###
 ## crear nuevo usuario carlos ok
@@ -74,6 +74,6 @@ Content-Type: application/json
 
 ###
 ## getCompra usuario carlos con JWT 
-GET http://localhost:10000/api/compra/1 HTTP/1.1
+GET http://localhost:10000/api/compra/2 HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZWRybyIsImlhdCI6MTc0MDA4OTg4NywiZXhwIjoxNzQwMTI1ODg3fQ.FB54AWvVjylRHt9wjgdVE1ZMkz7PYECmJ5al_4Yi8Xg
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjYXJsb3MiLCJpYXQiOjE3NDA0MTk1NjcsImV4cCI6MTc0MDQ1NTU2N30.0A5SgAMgjXIrrTVCYYk9MYLFXndSrXRHw-8RYTDXvYY
