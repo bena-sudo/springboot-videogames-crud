@@ -2,7 +2,7 @@
 ## create  
 POST http://localhost:10000/api/compra/ HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZWRybyIsImlhdCI6MTc0MDA5MzI3OCwiZXhwIjoxNzQwMTI5Mjc4fQ.EjEgLSaTKsI1PSMMAadPzCYMnVclksj_iGjgWIFh4YM
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZWRybyIsImlhdCI6MTc0MDQxMTgwNSwiZXhwIjoxNzQwNDQ3ODA1fQ.DlM8Vl19H6sWMBt-gWuYXPRDFUXd8xp2LVJR419cNBk
 
 {
     "usuario": {
