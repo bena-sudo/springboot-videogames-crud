@@ -4,15 +4,14 @@ DROP TABLE IF EXISTS usuarios_roles;
 DROP TABLE IF EXISTS compras;
 DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS usuarios;
-DROP TABLE docvideojuegos;
+DROP TABLE IF EXISTS docvideojuegos;
 DROP TABLE IF EXISTS videojuegos;
 -- Crea la tabla videojuegos
 CREATE TABLE IF NOT EXISTS videojuegos (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
     categoria VARCHAR(100) NOT NULL,
-    precio DECIMAL(10, 2) NOT NULL,
-    imagen_base64 TEXT
+    precio DECIMAL(10, 2) NOT NULL
 );
 -- Crea la tabla usuarios
 CREATE TABLE IF NOT EXISTS usuarios (
@@ -174,102 +173,87 @@ VALUES (
         'hash_password_20'
     );
 -- Inserta videojuegos
-INSERT INTO videojuegos (nombre, categoria, precio, imagen_base64)
-VALUES ('The Witcher 3', 'RPG', 39.99, 'base64_string_1'),
-    ('FIFA 23', 'Deportes', 59.99, 'base64_string_2'),
+INSERT INTO videojuegos (nombre, categoria, precio)
+VALUES ('The Witcher 3', 'RPG', 39.99),
+    ('FIFA 23', 'Deportes', 59.99),
     (
         'Call of Duty: Modern Warfare',
         'Shooter',
-        69.99,
-        'base64_string_3'
+        69.99
     ),
     (
         'Minecraft',
         'Aventura',
-        29.99,
-        'base64_string_4'
+        29.99
     ),
     (
         'Fortnite',
         'Battle Royale',
-        0.00,
-        'base64_string_5'
+        0.00
     ),
     (
         'Grand Theft Auto V',
         'Acción',
-        49.99,
-        'base64_string_6'
+        49.99
     ),
     (
         'Red Dead Redemption 2',
         'Aventura',
-        59.99,
-        'base64_string_7'
+        59.99
     ),
     (
         'Cyberpunk 2077',
         'RPG',
-        44.99,
-        'base64_string_8'
+        44.99
     ),
     (
         'Assassin’s Creed Valhalla',
         'Aventura',
-        54.99,
-        'base64_string_9'
+        54.99
     ),
     (
         'Resident Evil Village',
         'Horror',
-        59.99,
-        'base64_string_10'
+        59.99
     ),
     (
         'Super Mario Odyssey',
         'Plataformas',
-        49.99,
-        'base64_string_11'
+        49.99
     ),
     (
         'Animal Crossing: New Horizons',
         'Simulación',
-        59.99,
-        'base64_string_12'
+        59.99
     ),
     (
         'Halo Infinite',
         'Shooter',
-        59.99,
-        'base64_string_13'
+        59.99
     ),
-    ('Fall Guys', 'Party', 19.99, 'base64_string_14'),
+    ('Fall Guys', 'Party', 19.99),
     (
         'League of Legends',
         'MOBA',
-        0.00,
-        'base64_string_15'
+        0.00
     ),
     (
         'Apex Legends',
         'Battle Royale',
-        0.00,
-        'base64_string_16'
+        0.00
     ),
-    ('Destiny 2', 'Shooter', 0.00, 'base64_string_17'),
+    ('Destiny 2', 'Shooter', 0.00),
     (
         'God of War',
         'Acción',
-        49.99,
-        'base64_string_18'
+        49.99
     ),
     (
         'The Legend of Zelda: Breath of the Wild',
         'Aventura',
-        59.99,
-        'base64_string_19'
+        59.99
     ),
-    ('Elden Ring', 'RPG', 69.99, 'base64_string_20');
+    ('Elden Ring', 'RPG', 69.99);
 -- Inserta compras
 INSERT INTO compras (usuario_id, videojuego_id, fecha)
 VALUES (1, 1, '2025-01-01 10:00:00'),
